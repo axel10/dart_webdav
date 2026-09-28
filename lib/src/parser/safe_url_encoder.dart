@@ -81,6 +81,9 @@ class SafeUrlEncoder {
     base = base.replaceAll(RegExp(r'/+$'), '');
 
     var path = relativePath.trim();
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      return encodeUrl(path);
+    }
     if (!path.startsWith('/')) {
       path = '/$path';
     }

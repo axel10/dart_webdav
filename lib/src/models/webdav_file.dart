@@ -44,6 +44,7 @@ class WebDavFile {
   /// True if the file extension matches common audio formats.
   bool get isAudio {
     if (isDirectory) return false;
+    if (p.basename(name).startsWith('._')) return false;
     final ext = p.extension(name).toLowerCase();
     return const {
       '.mp3',
@@ -58,8 +59,15 @@ class WebDavFile {
       '.dff',
       '.wma',
       '.alac',
+      '.aif',
       '.aiff',
       '.wv',
+      '.caf',
+      '.m4b',
+      '.m4p',
+      '.mid',
+      '.midi',
+      '.webm',
     }.contains(ext);
   }
 
@@ -74,7 +82,7 @@ class WebDavFile {
   bool get isLyric {
     if (isDirectory) return false;
     final ext = p.extension(name).toLowerCase();
-    return ext == '.lrc' || ext == '.txt';
+    return ext == '.lrc';
   }
 
   WebDavFile copyWith({
